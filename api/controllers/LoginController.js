@@ -8,6 +8,7 @@
 var logicLayer = require("../logicLayer/logicLayer.js");
 var ReturnVO = require("../vo/valueObjects.js").vos;
 var messages = require("../CONST/messages");
+var md5 = require('md5');
 
 module.exports = {
 
@@ -18,7 +19,7 @@ module.exports = {
         var token,createdDate;
         var userLogin = {
             username:req.param("username"),
-            password:req.param("password")
+            password:md5(req.param("password"))
         };
         Admin.find(userLogin).then(function(admin){
             if(admin && admin.length>0){
